@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block page_title %} Edge Academy Blog | Novo post {% endblock page_title %}
 {% block content %}
+<div class="w-2/3">
 <form method="POST" enctype="multipart/form-data">
- 
+
     <!-- Security token -->
     {% csrf_token %}
  
     <!-- Using the formset -->
     {{ form.as_p }}
      
-    <input type="submit" value="Submit">
+    <button type="submit" class="rounded-md text-[#ffffff] bg-[#363737] mt-4 py-2 px-8 w-full">Criar</button>
 </form>
+</div>
 {% endblock content %}

@@ -1,7 +1,13 @@
-<h1>Login</h1>
+{% extends "base.html" %}
+{% block page_title %} Edge Academy Blog | Novo post {% endblock page_title %}
+{% block content %}
+<div class="w-80">
+<h1 class="text-xl text-black text-center">Edge Academy Blog 😀</h1>
+
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
-    <a href="{% url 'myauth:signup' %}">Dont have Account Create</a>
+    <button type="submit" class="rounded-md text-[#ffffff] bg-[#363737] mt-8 py-2 px-8 w-full">Entrar</button>
 </form>
+</div>
+{% endblock content %}
