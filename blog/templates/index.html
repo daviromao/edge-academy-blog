@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block page_title %} Edge Academy Blog {% endblock page_title %}
+
+{% block content %}
+  <h1>Publicações recentes</h1>
+    {% for post in posts %}
+      <h2>
+        <a href="{% url 'blog:post_detail' post.slug %}">
+          {{ post.title|lower|capfirst }}
+        </a>
+      </h2>
+      <p>
+        <a href="{% url 'blog:post_detail' post.slug %}">
+        {{post.content|truncatechars:150|capfirst}}
+        </a>
+      </p>
+      <p>
+        {{post.created_at|date}}
+      </p>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+{% endblock content %}
