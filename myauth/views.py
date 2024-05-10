@@ -1,13 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
+from .models import SignUpCode
 
 def user_signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
+            code = request.GET.get('code', None)
+            signUpCode = SignUpCode.objects.filter(code=code, email=form.cleaned_data['email']).first()
+            if(not signUpCode):
+                form.add_error('email', 'Código de cadastro inválido')
+                return render(request, 'register.html', {'form': form})
             form.save()
-            return redirect('login')
+            signUpCode.delete()
+            return redirect('myauth:login')
     else:
         form = SignupForm()
     return render(request, 'register.html', {'form': form})
